@@ -1,46 +1,73 @@
-import React, { useState } from "react";
 import "./App.css";
-import Sidebar from "./components/Sidebar";
-import Editor from "./components/Editor";
 import { nanoid } from "nanoid";
+import Notes from "./components/Notes";
+import { useState } from "react";
 
 function App() {
-  const [notes, setNotes] = useState([]);
-  const [currentNoteId, setcurrentNoteId] = useState(
-    notes.length > 0 ? notes[0].id : ""
+  const [note, setNotes] = useState([
+    {
+      id: "kjfdijofdfdidijf",
+      title: "Hel",
+      body: "kljdjlskdjskl",
+    },
+  ]);
+  const [formData, setFormData] = useState({
+    id: "",
+    title: "",
+    body: "",
+  });
+  const [currentNoteId, setCurrentNoteId] = useState(
+    (note[0] && note[0].id) || ""
   );
-
-  function createNote() {
-    const note = { id: nanoid(), body: "Hello" };
-    setNotes((prev) => [note, ...prev]);
-    setcurrentNoteId(note.id);
+  function handleSubmit(event) {
+    event.preventDefault();
+    setFormData((prev) => {
+      return { ...prev, id: nanoid() };
+    });
+    setNotes((prev) => {
+      return [...prev, formData];
+    });
   }
-
-  function updateNote(e) {
-    setNotes((prev) => [{ body: e.target.value }, ...prev]);
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
   }
-
-  function findCurrentNote() {
-    return (
-      notes.find((note) => note.id === currentNoteId) ||
-      (notes.length > 0 ? notes[0] : null)
-    );
-  }
-
-  console.log(notes, currentNoteId);
-
   return (
     <div className="container">
-      {notes.length > 0 ? (
-        <Sidebar
-          createNote={createNote}
-          notes={notes}
-          currentNoteId={findCurrentNote}
-          setcurrentNoteId={setcurrentNoteId}
-        />
-      ) : (
-        <button onClick={createNote}>Create</button>
-      )}
+      <div className="sidebar">
+        <h2>Notes App</h2>
+        <p>Notes</p>
+      </div>
+      <div className="inner_con">
+        <form onSubmit={handleSubmit} className="create_element_con">
+          <button>Add a Note</button>
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            className="title"
+            value={formData.title}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="body"
+            placeholder="Take a note"
+            className="body"
+            value={formData.body}
+            onChange={handleChange}
+          />
+        </form>
+        {note[0] && (
+          <Notes
+            notes={note}
+            currentid={currentNoteId}
+            setCurrentNoteId={setCurrentNoteId}
+          />
+        )}
+      </div>
     </div>
   );
 }
