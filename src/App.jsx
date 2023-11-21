@@ -1,16 +1,14 @@
 import "./App.css";
 import { nanoid } from "nanoid";
 import Notes from "./components/Notes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClipboard } from "@fortawesome/free-regular-svg-icons";
 
 function App() {
-  const [note, setNotes] = useState([
-    {
-      id: "kjfdijofdfdidijf",
-      title: "Hel",
-      body: "kljdjlskdjskl",
-    },
-  ]);
+  const storedNotes = localStorage.getItem("notes");
+  const [note, setNotes] = useState(storedNotes ? JSON.parse(storedNotes) : []);
+
   const [formData, setFormData] = useState({
     id: "",
     title: "",
@@ -25,7 +23,7 @@ function App() {
       return { ...prev, id: nanoid() };
     });
     setNotes((prev) => {
-      return [...prev, formData];
+      return [formData, ...prev];
     });
   }
   function handleChange(e) {
@@ -34,11 +32,23 @@ function App() {
       return { ...prev, [name]: value };
     });
   }
+  function deleteNote() {
+    setNotes((prev) => {
+      const updatedNotes = prev.filter((note) => note.id !== currentNoteId);
+      return updatedNotes;
+    });
+  }
+  useEffect(() => {
+    const convert = JSON.stringify(note);
+    localStorage.setItem("notes", convert);
+  }, [note]);
   return (
     <div className="container">
       <div className="sidebar">
         <h2>Notes App</h2>
-        <p>Notes</p>
+        <p>
+          <FontAwesomeIcon icon={faClipboard} /> Notes
+        </p>
       </div>
       <div className="inner_con">
         <form onSubmit={handleSubmit} className="create_element_con">
@@ -65,6 +75,7 @@ function App() {
             notes={note}
             currentid={currentNoteId}
             setCurrentNoteId={setCurrentNoteId}
+            deleteNote={deleteNote}
           />
         )}
       </div>
