@@ -15,7 +15,7 @@ function App() {
     body: "",
   });
   const [currentNoteId, setCurrentNoteId] = useState(
-    (note[0] && note[0].id) || ""
+    () => (note[0] && note[0].id) || ""
   );
   function handleSubmit(event) {
     event.preventDefault();
