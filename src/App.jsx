@@ -32,10 +32,10 @@ function App() {
       return { ...prev, [name]: value };
     });
   }
-  function deleteNote() {
+  function deleteNote(event, noteID) {
+    event.stopPropagation();
     setNotes((prev) => {
-      const updatedNotes = prev.filter((note) => note.id !== currentNoteId);
-      return updatedNotes;
+      return prev.filter((note) => note.id !== noteID);
     });
   }
   useEffect(() => {

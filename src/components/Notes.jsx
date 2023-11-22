@@ -21,7 +21,7 @@ export default function Notes({
             icon={faTrashCan}
             key={item.id}
             className="delete"
-            onClick={deleteNote}
+            onClick={(event) => deleteNote(event, item.id)}
           />
         </div>
         <p>{item.body}</p>
