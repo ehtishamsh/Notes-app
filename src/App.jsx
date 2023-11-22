@@ -10,13 +10,14 @@ function App() {
   const [note, setNotes] = useState(storedNotes ? JSON.parse(storedNotes) : []);
 
   const [formData, setFormData] = useState({
-    id: "",
+    id: nanoid(),
     title: "",
     body: "",
   });
   const [currentNoteId, setCurrentNoteId] = useState(
     () => (note[0] && note[0].id) || ""
   );
+  const currentNote = note.find((note) => note.id === currentNoteId) || note[0];
   function handleSubmit(event) {
     event.preventDefault();
     setFormData((prev) => {
@@ -73,7 +74,7 @@ function App() {
         {note[0] && (
           <Notes
             notes={note}
-            currentid={currentNoteId}
+            currentid={currentNote}
             setCurrentNoteId={setCurrentNoteId}
             deleteNote={deleteNote}
           />

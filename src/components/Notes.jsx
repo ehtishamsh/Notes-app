@@ -12,7 +12,7 @@ export default function Notes({
     return (
       <div
         onClick={() => setCurrentNoteId((prev) => item.id)}
-        className={`note ${item.id === currentid ? "selected" : ""}`}
+        className={`note ${item.id === currentid.id ? "selected" : ""}`}
         key={item.id}
       >
         <div className="title_div">
