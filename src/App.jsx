@@ -45,11 +45,13 @@ function App() {
   }, [note]);
   return (
     <div className="container">
-      <div className="sidebar">
-        <h2>Notes App</h2>
-        <p>
-          <FontAwesomeIcon icon={faClipboard} /> Notes
-        </p>
+      <div className="sidebar_con">
+        <div className="sidebar">
+          <h2>Notes App</h2>
+          <p>
+            <FontAwesomeIcon icon={faClipboard} /> Notes
+          </p>
+        </div>
       </div>
       <div className="inner_con">
         <form onSubmit={handleSubmit} className="create_element_con">

@@ -6,6 +6,46 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #e3e8f8;
 }
+@media only screen and (max-width: 900px) {
+  body {
+    height: fit-content;
+  }
+  .container {
+    flex-direction: column;
+  }
+  .sidebar_con {
+    width: 100% !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    overflow: hidden;
+  }
+  .sidebar {
+    padding: 20px !important;
+  }
+  .sidebar h2 {
+    margin: 0 !important;
+    margin-bottom: 10px !important;
+  }
+  .sidebar p {
+    margin: 0 !important;
+  }
+
+  .inner_con {
+    padding: 0 !important;
+  }
+
+  .cards_con {
+    flex-direction: column;
+    align-items: center;
+    padding: 0px !important;
+  }
+  .main_note_con {
+    padding: 0px 20px !important;
+  }
+  .create_element_con {
+    margin: 20px 20px;
+  }
+}
 #root {
   height: 100%;
 }
@@ -147,18 +187,18 @@ body {
   background-color: #203562;
 }
 .note {
-  min-width: 220px;
-  max-width: 220px;
-  height: 150px;
+  min-width: 230px;
+  max-width: 230px;
+  height: 160px;
   padding: 22px;
   border-radius: 16px;
-  box-shadow: 2px 4px 16px 0px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 16px 0px rgba(32, 53, 98, 0.47);
   background-color: #f5f5f5;
   text-overflow: ellipsis;
 }
 .note h2 {
   width: 100%;
-  font-size: 24px;
+  font-size: 17px;
   font-style: normal;
   font-weight: 600;
   line-height: 20.6px;
@@ -174,17 +214,19 @@ body {
 .note p {
   width: 100%;
   height: 100%;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   margin: 0;
   color: #303030;
   word-break: break-all;
 }
-.sidebar {
+.sidebar_con {
   width: 350px;
   height: 100%;
   background-color: #f5f5f5;
   padding: 0px 24px;
+}
+.sidebar {
   color: #203562;
 }
 
